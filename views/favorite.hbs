@@ -1,0 +1,23 @@
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+  <div class="row">
+    {{#if movieList}}
+    {{#each movieList}}
+    <div class="card col-3">
+      <img src="https://image.tmdb.org/t/p/original/{{this.poster_path}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{this.title}}</h5>
+
+      </div>
+      <div class="card-footer bg-transparent border-success text-right d-flex justify-content-between">
+        <a href="/movies/{{this.id}}" class="btn btn-outline-primary btn-sm">Detail</a>
+        <form action="/favorite/{{this.id}}?_method=DELETE" method="POST">
+          <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
+        </form>
+      </div>
+    </div>
+    {{/each}}
+    {{/if}}
+
+  </div>
+</div>
