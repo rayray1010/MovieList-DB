@@ -11,11 +11,10 @@
         <h5 class="card-title">{{this.original_title}}</h5>
         <div class="card-footer bg-transparent border-success text-right d-flex justify-content-between">
           <a href="/movies/{{this.id}}" class="btn btn-outline-primary btn-sm">Detail</a>
-          {{#if isAuthenticated}}
           <form action="/favorite/{{this.id}}" method="POST">
             <button class="btn btn-outline-secondary btn-sm" type="submit">Favorite</button>
           </form>
-          {{/if}}
+          <a href="/comments/new" class="btn btn-outline-primary btn-sm">comment</a>
         </div>
       </div>
     </div>

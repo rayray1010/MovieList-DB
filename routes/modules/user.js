@@ -52,37 +52,14 @@ router.post('/register', async (req, res) => {
       })
     }
     const hash = await bcrypt.hashSync(password, bcrypt.genSaltSync(10))
-    await User.create({ name, email, password: hash })
-    res.redirect('/users/login')
+    newUser = await User.create({ name, email, password: hash })
+    req.login(newUser, (result) => {
+      return res.redirect('/')
+    })
+    // res.redirect('/users/login')
   } catch (err) {
     console.log(err)
   }
-
-  // User.findOne({ where: { email } }).then((user) => {
-  //   if (user) {
-  //     errors.push({ message: '這個 Email 已註冊過！' })
-  //     console.log('User already exists')
-  //     return res.render('register', {
-  //       errors,
-  //       name,
-  //       email,
-  //       password,
-  //       confirmPassword,
-  //     })
-  //   }
-  //   return bcrypt
-  //     .genSalt(10)
-  //     .then((salt) => bcrypt.hash(password, salt))
-  //     .then((hash) =>
-  //       User.create({
-  //         name,
-  //         email,
-  //         password: hash,
-  //       })
-  //     )
-  //     .then(() => res.redirect('/'))
-  //     .catch((err) => console.log(err))
-  // })
 })
 router.get('/logout', (req, res) => {
   req.logout()

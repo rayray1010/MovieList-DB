@@ -4,9 +4,12 @@ const user = require('./modules/user')
 const movie = require('./modules/movie')
 const home = require('./modules/home')
 const favorite = require('./modules/favorite')
+const comment = require('./modules/comments')
+const { authenticator } = require('../middleware/auth')
 
 router.use('/movies', movie)
 router.use('/users', user)
-router.use('/favorite', favorite)
+router.use('/comments', comment)
+router.use('/favorite', authenticator, favorite)
 router.use('/', home)
 module.exports = router
