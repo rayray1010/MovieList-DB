@@ -11,7 +11,7 @@
       </div>
       <div class="card-footer bg-transparent border-success text-right d-flex justify-content-between">
         <a href="/movies/{{this.id}}" class="btn btn-outline-primary btn-sm">Detail</a>
-        <form action="/favorite/{{this.id}}?_method=DELETE" method="POST">
+        <form action="/movies/favorite/{{this.id}}?_method=DELETE" method="POST">
           <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
         </form>
       </div>

@@ -1,15 +1,25 @@
 const express = require('express')
 const router = express.Router()
-const user = require('./modules/user')
-const movie = require('./modules/movie')
-const home = require('./modules/home')
-const favorite = require('./modules/favorite')
-const comment = require('./modules/comments')
 const { authenticator } = require('../middleware/auth')
-
-router.use('/movies', movie)
-router.use('/users', user)
-router.use('/comments', comment)
-router.use('/favorite', authenticator, favorite)
-router.use('/', home)
+const passport = require('passport')
+const movieController = require('../controller/movieController')
+const userController = require('../controller/userController')
+const users = require('./modules/users1')
+const movies = require('./modules/movies')
+router.get('/', (req, res) => {
+  return res.redirect('/movies')
+})
+router.get('/users/login', userController.getLogin)
+router.post(
+  '/users/login',
+  passport.authenticate('local', {
+    successRedirect: '/movies',
+    failureRedirect: '/users/login'
+  }),
+  userController.postLogin
+)
+router.get('/users/register', userController.getRegister)
+router.post('/users/register', userController.postRegister)
+router.get('/users/logout', userController.getLogout)
+router.use('/movies', authenticator, movies)
 module.exports = router
