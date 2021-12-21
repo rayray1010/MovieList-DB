@@ -12,7 +12,7 @@ const movieController = {
       console.log(keyword)
       if (keyword && keyword !== 'undefined') {
         movieList = await axios.get(
-          `https://api.themoviedb.org/3/search/movie?api_key=5c37cf0fe463b92c7078fc96c24fe0ab&language=zh&query=${keyword}&page=1&include_adult=true`
+          `https://api.themoviedb.org/3/search/movie?api_key=5c37cf0fe463b92c7078fc96c24fe0ab&language=zh&query=${keyword}&page=1&include_adult=false`
         )
       } else {
         movieList = await axios.get(
